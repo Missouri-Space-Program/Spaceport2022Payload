@@ -54,7 +54,7 @@ void dateTime(uint16_t* date, uint16_t* time)
 
 void setup() 
 {
-  //Open up serial communications on 9600 baud (This will be removed in final push)
+  //Open up serial communications on 5700 baud (This will be removed in final push)
   Serial.begin(57600);
   #ifndef ESP8266
   while (!Serial); // wait for serial port to connect. Needed for native USB
