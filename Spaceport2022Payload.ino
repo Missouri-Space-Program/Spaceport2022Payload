@@ -56,24 +56,15 @@ void setup()
 {
   //Open up serial communications on 5700 baud (This will be removed in final push)
   Serial.begin(57600);
- // #ifndef ESP8266
-  //while (!Serial); // wait for serial port to connect. Needed for native USB
-  //#endif
 
   if (! rtc.begin()) {
     Serial.println("Couldn't find RTC");
     Serial.flush();
   }
 
-  /*if (rtc.lostPower()) {
-    Serial.println("RTC lost power, let's set the time!");
-    // When time needs to be set on a new device, or after a power loss, the
-    // following line sets the RTC to the date & time this sketch was compiled
-    rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
-  }*/
   //Create a reference pin that our accelerometers will use
   analogReference(AR_EXTERNAL);
-
+  //Set the date/time to be modified on the file itself
   SdFile::dateTimeCallback(dateTime);
 
   //Check if the SD card can begin on the specified pin, if not then print an error message
