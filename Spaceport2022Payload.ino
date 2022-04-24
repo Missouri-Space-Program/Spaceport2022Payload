@@ -56,21 +56,21 @@ void setup()
 {
   //Open up serial communications on 5700 baud (This will be removed in final push)
   Serial.begin(57600);
-  #ifndef ESP8266
-  while (!Serial); // wait for serial port to connect. Needed for native USB
-  #endif
+ // #ifndef ESP8266
+  //while (!Serial); // wait for serial port to connect. Needed for native USB
+  //#endif
 
   if (! rtc.begin()) {
     Serial.println("Couldn't find RTC");
     Serial.flush();
   }
 
-  if (rtc.lostPower()) {
+  /*if (rtc.lostPower()) {
     Serial.println("RTC lost power, let's set the time!");
     // When time needs to be set on a new device, or after a power loss, the
     // following line sets the RTC to the date & time this sketch was compiled
     rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
-  }
+  }*/
   //Create a reference pin that our accelerometers will use
   analogReference(AR_EXTERNAL);
 
@@ -99,6 +99,8 @@ void setup()
   }
   //Close the file after the test
   logger.close();
+  //Allows for LED light on feather to be turned on
+  pinMode(LED_BUILTIN, OUTPUT);
 }
 
 void loop() {
@@ -197,8 +199,7 @@ void loop() {
   logger.print(' ');
   logger.print(z2Accel);
   logger.println();
-  //This adds a 500 millisecond delay so we have some gaps in the data receieved
- // delay(500);
+  digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
   //Finally close the file when done writing to get the data to write to the SD card
   logger.close();
 }
