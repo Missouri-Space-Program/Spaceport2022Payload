@@ -44,7 +44,7 @@ char filename[15];
 File logger;
 
 
-
+//This function gets the date and time from the RTC to be used to modify the timestamp on the file itself
 void dateTime(uint16_t* date, uint16_t* time)
 {
   DateTime now = rtc.now();
@@ -56,7 +56,7 @@ void setup()
 {
   //Open up serial communications on 5700 baud (This will be removed in final push)
   Serial.begin(57600);
-
+  //Print out warning message if the RTC couldn't be found attached
   if (! rtc.begin()) {
     Serial.println("Couldn't find RTC");
     Serial.flush();
@@ -171,15 +171,10 @@ void loop() {
 
   logger.print(" ");
   logger.print(rtc.getTemperature());
-  //logger.print("C");
-
- // logger.print(" X:");
   logger.print(' ');
   logger.print(x1Accel);
- // logger.print("G Y:");
   logger.print(' ');
   logger.print(y1Accel);
- // logger.print("G Z:");
   logger.print(' ');
   logger.print(z1Accel);
 
